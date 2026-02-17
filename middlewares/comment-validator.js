@@ -42,3 +42,11 @@ export const validateCommentById = [
 
   checkValidators,
 ];
+
+// Comentarios por post
+export const validateCommentsByPost = [
+  param('postId')
+    .isMongoId()
+    .withMessage('ID de publicación inválido'),
+  checkValidators,
+];
