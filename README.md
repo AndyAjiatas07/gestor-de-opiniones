@@ -1,138 +1,90 @@
-# gestor-de-opiniones
-
+gestor-de-opiniones
 📘 OpinaNet API
 
 API REST para la gestión de usuarios, publicaciones y comentarios.
 
-🚀 Base URL
+🖥️ Ejecución del proyecto (Backend + Frontend)
+
+El proyecto está dividido en dos partes:
+
+Backend → API REST (Node.js + Express + MongoDB)
+
+Frontend → Aplicación React (Vite)
+
+Ambos deben ejecutarse por separado.
+
+1️⃣ Ejecutar Backend
+
+Ubícate en la carpeta del servidor:
+
+cd backend
+
+Instala dependencias:
+
+npm install
+
+Crea un archivo .env con:
+
+
+
+
+.env
+
+PORT=3001
+NODE_ENV=development
+URL_MONGODB=mongodb://localhost:27017/OpinaNet
+JWT_SECRET=supersecret_academico
+JWT_EXPIRES=4h
+
+
+
+
+
+Inicia el servidor:
+
+npm run dev
+
+Disponible en:
+
 http://localhost:3001/OpinaNetAdmin/v1
+2️⃣ Ejecutar Frontend
 
-🔐 Autenticación
+En otra terminal:
 
-Los endpoints protegidos requieren token JWT.
+cd frontend
 
-Header requerido:
+Instala dependencias:
 
-Authorization: Bearer TU_TOKEN
+npm install
 
+Ejecuta la aplicación:
 
-Obtén el token al iniciar sesión.
+npm run dev
 
-👤 USERS
-📝 Registrar usuario
+Disponible en:
 
-POST /users/register
+http://localhost:5173
+🔄 ¿Qué implica ejecutar ambos?
 
-Body
-{
-  "username": "andy",
-  "email": "andy@email.com",
-  "password": "123456"
-}
+El frontend consume la API del backend.
 
-🔑 Iniciar sesión
+El backend debe estar activo para:
 
-POST /users/login
+Autenticación
 
-Body
-{
-  "identifier": "andy@email.com",
-  "password": "123456"
-}
+Crear publicaciones
 
+Crear comentarios
 
-📌 Devuelve un token JWT.
+Editar o eliminar contenido
 
-🙍 Obtener mi perfil
+Si el backend no está corriendo, el frontend mostrará errores 400, 404 o 500.
 
-GET /users/me 🔒
+🛑 Requisitos previos
 
-Devuelve los datos esenciales del usuario autenticado.
+Node.js instalado
 
-✏️ Actualizar perfil
-
-PUT /users/profile 🔒
-
-Body (opcional)
-{
-  "username": "nuevo_nombre"
-}
-
-📝 POSTS
-➕ Crear publicación
-
-POST /posts 🔒
-
-Body
-{
-  "title": "Mi primer post",
-  "category": "Tecnologia",
-  "content": "Este es mi contenido"
-}
-
-✏️ Actualizar publicación
-
-PUT /posts/{idPost} 🔒
-
-Body
-{
-  "title": "Nuevo título"
-}
-
-🗑️ Eliminar publicación
-
-DELETE /posts/{idPost} 🔒
-
-👤 Ver publicaciones de un usuario
-
-GET /posts/user/{idUser}
-
-📄 Ver mis publicaciones
-
-GET /posts/me 🔒
-
-🌍 Ver todas las publicaciones
-
-GET /posts
-
-💬 COMMENTS
-➕ Crear comentario
-
-POST /comments 🔒
-
-Body
-{
-  "content": "Excelente publicación!",
-  "postId": "ID_DEL_POST"
-}
-
-✏️ Actualizar comentario
-
-PUT /comments/{idComment} 🔒
-
-Body
-{
-  "content": "Comentario editado"
-}
-
-🗑️ Eliminar comentario
-
-DELETE /comments/{idComment} 🔒
-
-📄 Ver comentarios de una publicación
-
-GET /comments/post/{idPost}
-
-👤 Ver mis comentarios
-
-GET /comments/me 🔒
-
-❤️ HEALTH CHECK
-Verificar estado del servidor
-
-GET /health
-
-Devuelve estado del API.
+MongoDB activo (local o Atlas)
 
 📦 Tecnologías
 
@@ -148,19 +100,134 @@ JWT Authentication
 
 Express Validator
 
-⚙️ Instalación
-npm install
+React (Frontend)
 
-▶️ Ejecutar proyecto
-npm run dev
+Vite
 
 🔐 Variables de entorno (.env)
 PORT=3001
 MONGO_URI=tu_conexion
 JWT_SECRET=tu_secreto
 
+🚀 Base URL
+http://localhost:3001/OpinaNetAdmin/v1
+🔐 Autenticación
 
-⚠️ Nunca subas el archivo .env al repositorio.
+Los endpoints protegidos requieren token JWT.
+
+Header requerido:
+
+Authorization: Bearer TU_TOKEN
+
+El token se obtiene al iniciar sesión.
+
+👤 USERS
+📝 Registrar usuario
+
+POST /users/register
+
+Body:
+
+{
+  "username": "andy",
+  "email": "andy@email.com",
+  "password": "123456"
+}
+🔑 Iniciar sesión
+
+POST /users/login
+
+Body:
+
+{
+  "identifier": "andy@email.com",
+  "password": "123456"
+}
+
+Devuelve un token JWT.
+
+🙍 Obtener mi perfil 🔒
+
+GET /users/me
+
+Devuelve los datos del usuario autenticado.
+
+✏️ Actualizar perfil 🔒
+
+PUT /users/profile
+
+Body opcional:
+
+{
+  "username": "nuevo_nombre"
+}
+📝 POSTS
+➕ Crear publicación 🔒
+
+POST /posts
+
+{
+  "title": "Mi primer post",
+  "category": "Tecnologia",
+  "content": "Este es mi contenido"
+}
+✏️ Actualizar publicación 🔒
+
+PUT /posts/{idPost}
+
+{
+  "title": "Nuevo título"
+}
+🗑️ Eliminar publicación 🔒
+
+DELETE /posts/{idPost}
+
+👤 Ver publicaciones de un usuario
+
+GET /posts/user/{idUser}
+
+📄 Ver mis publicaciones 🔒
+
+GET /posts/me
+
+🌍 Ver todas las publicaciones
+
+GET /posts
+
+💬 COMMENTS
+➕ Crear comentario 🔒
+
+POST /comments
+
+{
+  "content": "Excelente publicación!",
+  "postId": "ID_DEL_POST"
+}
+✏️ Actualizar comentario 🔒
+
+PUT /comments/{idComment}
+
+{
+  "content": "Comentario editado"
+}
+🗑️ Eliminar comentario 🔒
+
+DELETE /comments/{idComment}
+
+📄 Ver comentarios de una publicación
+
+GET /comments/post/{idPost}
+
+👤 Ver mis comentarios 🔒
+
+GET /comments/me
+
+❤️ HEALTH CHECK
+Verificar estado del servidor
+
+GET /health
+
+Devuelve el estado del API.
 
 👨‍💻 Autor
 
