@@ -111,7 +111,8 @@ export const updateProfile = async (req, res) => {
     const { username, email, oldPassword, newPassword } = req.body;
 
     const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: "Usuario no encontrado" });
+    if (!user)
+      return res.status(404).json({ message: "Usuario no encontrado" });
 
     // Actualizar email
     if (email) {
@@ -124,9 +125,14 @@ export const updateProfile = async (req, res) => {
     // Actualizar contraseña
     if (newPassword) {
       if (!oldPassword)
-        return res.status(400).json({ message: "Debe proporcionar la contraseña actual" });
+        return res
+          .status(400)
+          .json({ message: "Debe proporcionar la contraseña actual" });
       const valid = await bcrypt.compare(oldPassword, user.password);
-      if (!valid) return res.status(401).json({ message: "Contraseña actual incorrecta" });
+      if (!valid)
+        return res
+          .status(401)
+          .json({ message: "Contraseña actual incorrecta" });
       user.password = await bcrypt.hash(newPassword, 10);
     }
 
@@ -134,7 +140,9 @@ export const updateProfile = async (req, res) => {
     if (username) {
       const exists = await User.findOne({ username });
       if (exists && exists._id.toString() !== userId)
-        return res.status(400).json({ message: "El nombre de usuario ya está en uso" });
+        return res
+          .status(400)
+          .json({ message: "El nombre de usuario ya está en uso" });
       user.username = username;
     }
 
@@ -144,7 +152,7 @@ export const updateProfile = async (req, res) => {
     const { password: _, ...userData } = user.toObject();
     res.json({
       message: "Perfil actualizado correctamente",
-      user: userData
+      user: userData,
     });
   } catch (error) {
     console.error(error);
@@ -155,24 +163,23 @@ export const updateProfile = async (req, res) => {
 // OBTENER MIS DATOS
 // ==============================
 export const getMyProfile = async (req, res) => {
-    try {
-        const user = await User.findById(req.user.uid).select(
-            "username email role createdAt"
-        );
+  try {
+    const user = await User.findById(req.user.uid).select(
+      "username email role createdAt",
+    );
 
-        if (!user) {
-            return res.status(404).json({
-                message: "Usuario no encontrado"
-            });
-        }
-
-        res.json(user);
-
-    } catch (error) {
-        res.status(500).json({
-            message: "Error al obtener el perfil"
-        });
+    if (!user) {
+      return res.status(404).json({
+        message: "Usuario no encontrado",
+      });
     }
+
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({
+      message: "Error al obtener el perfil",
+    });
+  }
 };
 
 // ==============================
@@ -180,8 +187,7 @@ export const getMyProfile = async (req, res) => {
 // ==============================
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find()
-      .select("username email createdAt"); // sin password
+    const users = await User.find().select("username email createdAt"); // sin password
 
     res.json(users);
   } catch (error) {

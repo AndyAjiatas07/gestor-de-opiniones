@@ -101,10 +101,13 @@ export const getMyPosts = async (req, res) => {
 // Obtener un post por ID
 export const getPostById = async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id)
-      .populate("author", "username email");
+    const post = await Post.findById(req.params.id).populate(
+      "author",
+      "username email",
+    );
 
-    if (!post) return res.status(404).json({ message: "Publicación no encontrada" });
+    if (!post)
+      return res.status(404).json({ message: "Publicación no encontrada" });
 
     res.json(post);
   } catch (error) {

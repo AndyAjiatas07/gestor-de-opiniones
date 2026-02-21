@@ -1,69 +1,65 @@
-import { body, param } from 'express-validator';
-import { checkValidators } from './check-validators.js';
+import { body, param } from "express-validator";
+import { checkValidators } from "./check-validators.js";
 
 // Registro
 export const validateRegisterUser = [
-  body('username')
+  body("username")
     .trim()
     .notEmpty()
-    .withMessage('El nombre de usuario es requerido')
+    .withMessage("El nombre de usuario es requerido")
     .isLength({ max: 50 })
-    .withMessage('El nombre de usuario no puede exceder 50 caracteres'),
+    .withMessage("El nombre de usuario no puede exceder 50 caracteres"),
 
-  body('email')
+  body("email")
     .notEmpty()
-    .withMessage('El correo es requerido')
+    .withMessage("El correo es requerido")
     .isEmail()
-    .withMessage('Correo no válido'),
+    .withMessage("Correo no válido"),
 
-  body('password')
+  body("password")
     .notEmpty()
-    .withMessage('La contraseña es requerida')
+    .withMessage("La contraseña es requerida")
     .isLength({ min: 6 })
-    .withMessage('La contraseña debe tener al menos 6 caracteres'),
+    .withMessage("La contraseña debe tener al menos 6 caracteres"),
 
   checkValidators,
 ];
 
 // Login
 export const validateLoginUser = [
-  body('identifier')
+  body("identifier")
     .notEmpty()
-    .withMessage('Debe ingresar correo o nombre de usuario'),
+    .withMessage("Debe ingresar correo o nombre de usuario"),
 
-  body('password')
-    .notEmpty()
-    .withMessage('La contraseña es requerida'),
+  body("password").notEmpty().withMessage("La contraseña es requerida"),
 
   checkValidators,
 ];
 
 // Actualizar perfil
 export const validateUpdateProfile = [
-  body('username')
+  body("username")
     .optional()
     .trim()
     .isLength({ max: 50 })
-    .withMessage('El nombre de usuario no puede exceder 50 caracteres'),
+    .withMessage("El nombre de usuario no puede exceder 50 caracteres"),
 
-  body('oldPassword')
+  body("oldPassword")
     .optional()
     .notEmpty()
-    .withMessage('Debe ingresar la contraseña actual'),
+    .withMessage("Debe ingresar la contraseña actual"),
 
-  body('newPassword')
+  body("newPassword")
     .optional()
     .isLength({ min: 6 })
-    .withMessage('La nueva contraseña debe tener al menos 6 caracteres'),
+    .withMessage("La nueva contraseña debe tener al menos 6 caracteres"),
 
   checkValidators,
 ];
 
 // Usuario por ID
 export const validateUserById = [
-  param('id')
-    .isMongoId()
-    .withMessage('ID debe ser un ObjectId válido'),
+  param("id").isMongoId().withMessage("ID debe ser un ObjectId válido"),
 
   checkValidators,
 ];

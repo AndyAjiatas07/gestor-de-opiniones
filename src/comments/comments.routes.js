@@ -5,7 +5,7 @@ import {
   deleteComment,
   getCommentsByPost,
   getMyComments,
-  getCommentById
+  getCommentById,
 } from "./comments.controller.js";
 
 import { verifyToken } from "../../middlewares/auth-validator.js";
@@ -14,7 +14,7 @@ import {
   validateCreateComment,
   validateUpdateComment,
   validateCommentById,
-  validateCommentsByPost
+  validateCommentsByPost,
 } from "../../middlewares/comment-validator.js";
 
 const router = Router();

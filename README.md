@@ -1,7 +1,27 @@
-gestor-de-opiniones
+gestor-de-opiniones-backend
 📘 OpinaNet API
 
 API REST para la gestión de usuarios, publicaciones y comentarios.
+
+📂Estructura inicial del Proyecto
+
+Crea una carpeta (puede ser "OpinaNet").
+
+Clona los repositorios dentro de ella:
+
+Backend:
+
+git clone https://github.com/AndyAjiatas07/gestor-de-opiniones-backend
+
+Frontend:
+
+git clone https://github.com/AndyAjiatas07/gestor-de-opiniones-frontend
+
+La estructura final será:
+
+OpinaNet/
+├── gestor-de-opiniones-backend/
+└── gestor-de-opiniones-frontend/
 
 🖥️ Ejecución del proyecto (Backend + Frontend)
 
@@ -17,16 +37,13 @@ Ambos deben ejecutarse por separado.
 
 Ubícate en la carpeta del servidor:
 
-cd backend
+cd gestor-de-opiniones-backend
 
 Instala dependencias:
 
 npm install
 
 Crea un archivo .env con:
-
-
-
 
 .env
 
@@ -36,10 +53,6 @@ URL_MONGODB=mongodb://localhost:27017/OpinaNet
 JWT_SECRET=supersecret_academico
 JWT_EXPIRES=4h
 
-
-
-
-
 Inicia el servidor:
 
 npm run dev
@@ -47,11 +60,12 @@ npm run dev
 Disponible en:
 
 http://localhost:3001/OpinaNetAdmin/v1
+
 2️⃣ Ejecutar Frontend
 
 En otra terminal:
 
-cd frontend
+cd gestor-de-opiniones-frontend
 
 Instala dependencias:
 
@@ -105,9 +119,12 @@ React (Frontend)
 Vite
 
 🔐 Variables de entorno (.env)
+
 PORT=3001
-MONGO_URI=tu_conexion
-JWT_SECRET=tu_secreto
+NODE_ENV=development
+URL_MONGODB=mongodb://localhost:27017/OpinaNet
+JWT_SECRET=supersecret_academico
+JWT_EXPIRES=4h
 
 🚀 Base URL
 http://localhost:3001/OpinaNetAdmin/v1
@@ -161,6 +178,12 @@ Body opcional:
 {
   "username": "nuevo_nombre"
 }
+
+🙍 Obtener todos los usuarios 🔒
+
+GET /users
+
+
 📝 POSTS
 ➕ Crear publicación 🔒
 
@@ -194,6 +217,10 @@ GET /posts/me
 
 GET /posts
 
+📄 Ver una publicación por id
+
+GET /posts/{idPost}
+
 💬 COMMENTS
 ➕ Crear comentario 🔒
 
@@ -221,6 +248,10 @@ GET /comments/post/{idPost}
 👤 Ver mis comentarios 🔒
 
 GET /comments/me
+
+📄 Ver comentario por id 🔒
+
+GET /comments/{idComment}
 
 ❤️ HEALTH CHECK
 Verificar estado del servidor

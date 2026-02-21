@@ -32,6 +32,4 @@ router.get("/", verifyToken, getAllUsers);
 // Actualizar perfil
 router.put("/profile", verifyToken, validateUpdateProfile, updateProfile);
 
-
-
 export default router;
