@@ -33,6 +33,16 @@ Frontend → Aplicación React (Vite)
 
 Ambos deben ejecutarse por separado.
 
+0️⃣Crea un archivo .env en la raiz del proyecto de gestor-de-opiniones-backend con:
+
+.env
+
+PORT=3001
+NODE_ENV=development
+URL_MONGODB=mongodb://localhost:27017/OpinaNet
+JWT_SECRET=supersecret_academico
+JWT_EXPIRES=4h
+
 1️⃣ Ejecutar Backend
 
 Ubícate en la carpeta del servidor:
@@ -42,16 +52,6 @@ cd gestor-de-opiniones-backend
 Instala dependencias:
 
 npm install
-
-Crea un archivo .env con:
-
-.env
-
-PORT=3001
-NODE_ENV=development
-URL_MONGODB=mongodb://localhost:27017/OpinaNet
-JWT_SECRET=supersecret_academico
-JWT_EXPIRES=4h
 
 Inicia el servidor:
 
@@ -118,14 +118,6 @@ React (Frontend)
 
 Vite
 
-🔐 Variables de entorno (.env)
-
-PORT=3001
-NODE_ENV=development
-URL_MONGODB=mongodb://localhost:27017/OpinaNet
-JWT_SECRET=supersecret_academico
-JWT_EXPIRES=4h
-
 🚀 Base URL
 http://localhost:3001/OpinaNetAdmin/v1
 🔐 Autenticación
@@ -137,6 +129,7 @@ Header requerido:
 Authorization: Bearer TU_TOKEN
 
 El token se obtiene al iniciar sesión.
+
 
 👤 USERS
 📝 Registrar usuario
@@ -221,6 +214,7 @@ GET /posts
 
 GET /posts/{idPost}
 
+
 💬 COMMENTS
 ➕ Crear comentario 🔒
 
@@ -262,4 +256,4 @@ Devuelve el estado del API.
 
 👨‍💻 Autor
 
-Proyecto académico desarrollado por Andy Ariel Ajiatas Xiquin
+Proyecto académico desarrollado por Andy Ariel Ajiatas Xiquin - 2021496
